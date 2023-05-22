@@ -83,6 +83,18 @@ export default function Questions(props){
         }
     }
 
+    function returnDataTest(i){
+        if (green.includes(i)){
+            return "zap-icon";
+        }else if(red.includes(i)){
+            return "no-icon";
+        }else if(yellow.includes(i)){
+            return "partial-icon";
+        }else{
+            return "flashcard";
+        }
+    }
+
     return(
         <SCQuestions>
             {cards.map((card,i) => (
@@ -99,6 +111,7 @@ export default function Questions(props){
                     green={green.includes(i)}
                     yellow={yellow.includes(i)}
                     red={red.includes(i)}
+                    data-test="flashcard-text"
                 >
                     Pergunta {i+1}
                 </SCTexto>
@@ -106,7 +119,7 @@ export default function Questions(props){
                     disabled={disable.includes(i) ? true : false}
                     onClick={() => changeCardType(i)} 
                 >
-                    <img src={returnIcon(i)} />
+                    <img data-test={returnDataTest(i)} src={returnIcon(i)} />
                 </button>
             </SCQuestion>
             <SCAnswer
@@ -114,7 +127,7 @@ export default function Questions(props){
                 text={text.includes(i)}
                 disable={disable.includes(i)}
             >
-                <p>
+                <p data-test="flashcard-text">
                     {text.includes(i) ? card.answer : card.question}
                 </p>
                 <img 
@@ -128,6 +141,7 @@ export default function Questions(props){
                         id={0}
                         onClick={(() => wrong(i))}
                         color={'#FF3030'}
+                        data-test="no-btn"
                     >
                         Não Lembrei
                     </SCButton>
@@ -135,7 +149,8 @@ export default function Questions(props){
                         text={text.includes(i)}
                         id={1}
                         onClick={(() => almost(i))}
-                        color={'#FF922E'} 
+                        color={'#FF922E'}
+                        data-test="partial-btn"
                     >
                         Quase não Lembrei
                     </SCButton>
@@ -144,6 +159,7 @@ export default function Questions(props){
                         id={2}
                         onClick={(() => correct(i))}
                         color={'#2FBE34'}
+                        data-test="zap-btn"
                     >
                         Zap!
                     </SCButton>

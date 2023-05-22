@@ -5,7 +5,7 @@ export default function Footer(props){
     const {count, cards} = props;
 
     return(
-        <SCFooter>
+        <SCFooter data-test="footer">
             {count.length}/{cards.length} Concluidos
         </SCFooter>
     );
