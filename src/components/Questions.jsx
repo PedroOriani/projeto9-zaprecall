@@ -40,6 +40,24 @@ export default function Questions(props){
         setText(newArrAnsw);
     }
 
+    function correct(i){
+        const newArrGreen = [...green, i]
+        setGreen(newArrGreen);
+        unturn(i);
+    }
+
+    function almost(i){
+        const newArrYellow = [...yellow, i]
+        setYellow(newArrYellow);
+        unturn(i);
+    }
+
+    function wrong (i){
+        const newArrRed = [...red, i]
+        setRed(newArrRed);
+        unturn(i);
+    }
+
     function unturn(i) {
         testeStr = turned.join('')
         let newStr = testeStr.replace(i, '');
@@ -48,6 +66,8 @@ export default function Questions(props){
             strArr[i] = parseInt(strArr[i])
         }
         setTurned(strArr)
+        const newArrCount = [...count, i]
+        setCount(newArrCount);
         returnIcon(i);
     }
 
@@ -71,8 +91,17 @@ export default function Questions(props){
                 turned={turned.includes(i)}
                 unturned={unturned.includes(i)}
                 disable={disable.includes(i)}
+                green={green.includes(i)}
+                yellow={yellow.includes(i)}
+                red={red.includes(i)}
             >
-                <p>Pergunta {i+1}</p>
+                <SCTexto
+                    green={green.includes(i)}
+                    yellow={yellow.includes(i)}
+                    red={red.includes(i)}
+                >
+                    Pergunta {i+1}
+                </SCTexto>
                 <button 
                     disabled={disable.includes(i) ? true : false}
                     onClick={() => changeCardType(i)} 
@@ -97,7 +126,7 @@ export default function Questions(props){
                     <SCButton
                         text={text.includes(i)}
                         id={0}
-                        onClick={(() => unturn(i))}
+                        onClick={(() => wrong(i))}
                         color={'#FF3030'}
                     >
                         Não Lembrei
@@ -105,7 +134,7 @@ export default function Questions(props){
                     <SCButton
                         text={text.includes(i)}
                         id={1}
-                        onClick={(() => unturn(i))}
+                        onClick={(() => almost(i))}
                         color={'#FF922E'} 
                     >
                         Quase não Lembrei
@@ -113,7 +142,7 @@ export default function Questions(props){
                     <SCButton
                         text={text.includes(i)}
                         id={2}
-                        onClick={(() => unturn(i))}
+                        onClick={(() => correct(i))}
                         color={'#2FBE34'}
                     >
                         Zap!
@@ -165,7 +194,7 @@ const SCQuestion = styled.div`
         font-weight: 700;
         font-size: 16px;
         line-height: 19px;
-        color: #333333
+        color: ${(props => props.green ? 'green' : 'black')}
         text-decoration: ${(props => props.disable ? 'line-through' : 'none')};
     }
 
@@ -176,6 +205,11 @@ const SCQuestion = styled.div`
         border: none;
         cursor: pointer;
     }
+`
+
+const SCTexto = styled.p`
+    color: ${(props => props.green ? 'green' : 'black')}
+    text-decoration: ${(props => props.disable ? 'line-through' : 'none')};
 `
 
 const SCAnswer = styled.div`
@@ -207,7 +241,7 @@ const SCAnswer = styled.div`
         height: 20px;
         display: ${(props => props.text ? 'none' : '')};
         margin-left: 250px;
-        margin-top: 65px;
+        margin-top: 50px;
     }
 
 `
