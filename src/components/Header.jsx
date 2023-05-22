@@ -1,11 +1,18 @@
 import styled from 'styled-components';
 import logo from '../assets/logo.png'
 
-export default function Header(){
+export default function Header(props){
+
+    const {count, setCount} = props
+
+    function reload(){
+        window.location.reload();
+    }
+
     return(
         <SCHeader>
-            <img src={logo}></img>
-            ZapRecall
+            <img onClick={reload} src={logo}></img>
+            <p onClick={reload}>ZapRecall</p>
         </SCHeader>
     )
 }
@@ -34,5 +41,10 @@ const SCHeader  = styled.div`
         width: 52px;
         height: 60px;
         margin-right: 15px;
+        cursor: pointer;
+    }
+
+    p{
+        cursor: pointer;
     }
 `;

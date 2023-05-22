@@ -1,17 +1,27 @@
 import styled from 'styled-components';
-import turn from '../assets/seta_virar.png'
+import turn from '../assets/seta_virar.png';
 
-export default function Buttons() {
-    function chooseAnswer(){
+export default function Buttons(props) {
 
+    const {back, setFront, setBack, turn, setTurned} = props;
+
+    function showAnswer(){
+        setTurned('none');
+    }
+
+    function chooseAnswer() {
+        setFront('flex');
+        setBack('none');
     }
 
     return (
-        <SCButtons>
-            <img onClick={chooseAnswer} src={turn}/>
-            <button>Não Lembrei</button>
-            <button>Quase não Lembrei</button>
-            <button>Zap!</button>
+        <SCButtons
+            turn={turn}
+        >
+            <img onClick={showAnswer} src={turn} />
+            <button status={'Não lembrei'} onClick={() => chooseAnswer()}>Não Lembrei</button>
+            <button status={'Quase não lembrei'} onClick={() => chooseAnswer()}>Quase não Lembrei</button>
+            <button status={'Zap!'} onClick={() => chooseAnswer()}>Zap!</button>
         </SCButtons>
     );
 }
@@ -24,7 +34,9 @@ const SCButtons = styled.div`
         width: 85.17px;
         height: 37.17px;
 
-        background-color: #2FBE34;
+        display: ${(props) => props.turn === 'block' ? 'none' : 'block'};
+
+        cursor: pointer;
         border-radius: 5px;
         border: none;
 
@@ -33,15 +45,11 @@ const SCButtons = styled.div`
         font-size: 12px;
         line-height: 14px;
         color: #ffffff;
-
-
-        position: absolute;
-        right: 0px;
-        bottom: 0px;
     }
+
     img{
-        display: none;
         width: 30px;
-        height: 20px; 
+        height: 20px;
+        cursor: pointer;
     }
 `
