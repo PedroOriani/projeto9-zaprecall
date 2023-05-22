@@ -14,8 +14,13 @@ function App() {
     <Header />
     <Questions 
       cards={cards}
+      count={count}
+      setCount={setCount}
     />
-    <Footer />
+    <Footer
+      cards={cards}
+      count={count}
+    />
     </SCApp>
   );
 }

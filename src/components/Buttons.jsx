@@ -1,55 +1,66 @@
-import styled from 'styled-components';
-import turn from '../assets/seta_virar.png';
+// import styled from 'styled-components';
+// import certo from '../assets/icone_certo.png';
+// import quase from '../assets/icone_quase.png';
+// import erro from '../assets/icone_erro.png';
 
-export default function Buttons(props) {
+// export default function Buttons(props) {
 
-    const {back, setFront, setBack, turn, setTurned} = props;
+//     const buttons =[
+//         {
+//             id : 0,
+//             text : 'Não Lembrei',
+//             color : '#FF3030',
+//             img: erro
+//         },
+//         {
+//             id : 1,
+//             text : 'Quase não Lembrei',
+//             color :  '#FF922E',
+//             img: quase
+//         },
+//         {
+//             id : 2,
+//             text : 'Zap!',
+//             color :  '#2FBE34',
+//             img: certo
+//         }
+//     ]
 
-    function showAnswer(){
-        setTurned('none');
-    }
 
-    function chooseAnswer() {
-        setFront('flex');
-        setBack('none');
-    }
+//     return (
+//         <SCButtons
+//             text={text}
+//         >
+//             {buttons.map((button, i) => (
+//                 <button
+//                     key={i}
+//                     onClick={()}
+//                 >
+                    
+//                 </button>
+//             ))}
+//         </SCButtons>
+//     );
+// }
 
-    return (
-        <SCButtons
-            turn={turn}
-        >
-            <img onClick={showAnswer} src={turn} />
-            <button status={'Não lembrei'} onClick={() => chooseAnswer()}>Não Lembrei</button>
-            <button status={'Quase não lembrei'} onClick={() => chooseAnswer()}>Quase não Lembrei</button>
-            <button status={'Zap!'} onClick={() => chooseAnswer()}>Zap!</button>
-        </SCButtons>
-    );
-}
+// const SCButtons = styled.div`
+//     display: flex;
+//     justify-content: space-between;
 
-const SCButtons = styled.div`
-    display: flex;
-    justify-content: space-between;
+//     button{
+//         width: 85.17px;
+//         height: 37.17px;
 
-    button{
-        width: 85.17px;
-        height: 37.17px;
+//         display: ${(props) => props.turn === 'block' ? 'none' : 'block'};
 
-        display: ${(props) => props.turn === 'block' ? 'none' : 'block'};
+//         cursor: pointer;
+//         border-radius: 5px;
+//         border: none;
 
-        cursor: pointer;
-        border-radius: 5px;
-        border: none;
-
-        font-family: 'Recursive', sans-serif;
-        font-weight: 400;
-        font-size: 12px;
-        line-height: 14px;
-        color: #ffffff;
-    }
-
-    img{
-        width: 30px;
-        height: 20px;
-        cursor: pointer;
-    }
-`
+//         font-family: 'Recursive', sans-serif;
+//         font-weight: 400;
+//         font-size: 12px;
+//         line-height: 14px;
+//         color: #ffffff;
+//     }
+// `

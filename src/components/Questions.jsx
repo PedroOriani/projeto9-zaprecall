@@ -1,22 +1,67 @@
 import { useState } from 'react'
 import styled from 'styled-components';
-import play from '../assets/seta_play.png'
-import Buttons from './Buttons.jsx'
+import play from '../assets/seta_play.png';
+import turn from '../assets/seta_virar.png';
+import certo from '../assets/icone_certo.png';
+import quase from '../assets/icone_quase.png';
+import erro from '../assets/icone_erro.png';
 
 
 export default function Questions(props){
 
-    const {cards} = props;
+    const {cards, count, setCount} = props;
     const {question, answer} = cards;
 
-    const [turned, setTurned] = useState([])
-    const [text, setText] = useState(0)
+    let teste = [];
+    let testeStr;
+    let arrFinal = [];
 
-    function changeCardType(i){
-        setTurned([...turned, i]);
+    for (let i = 0; i < cards.length; i++){
+        teste.push(i)
     }
 
-    console.log(turned)
+    const [turned, setTurned] = useState([]);
+    const [disable, setDisable] = useState([]);
+    const [unturned, setUnturned] = useState([]);
+    const [text, setText] = useState([]);
+    const [green, setGreen] = useState([]);
+    const [red, setRed] = useState([]);
+    const [yellow, setYellow] = useState([]);
+
+    function changeCardType(i){
+        const newArrTurn = [...turned, i]
+        setTurned(newArrTurn);
+        const newArrDis = [...disable, i]
+        setDisable(newArrDis);
+    }
+
+    function showAnswer(i) {
+        const newArrAnsw = [...text, i]
+        setText(newArrAnsw);
+    }
+
+    function unturn(i) {
+        testeStr = turned.join('')
+        let newStr = testeStr.replace(i, '');
+        let strArr = newStr.split('')
+        for (let i = 0; i < strArr.length; i++){
+            strArr[i] = parseInt(strArr[i])
+        }
+        setTurned(strArr)
+        returnIcon(i);
+    }
+
+    function returnIcon(i){
+        if (green.includes(i)){
+            return certo;
+        }else if(red.includes(i)){
+            return erro
+        }else if(yellow.includes(i)){
+            return quase
+        }else{
+            return play
+        }
+    }
 
     return(
         <SCQuestions>
@@ -24,22 +69,57 @@ export default function Questions(props){
             <>
             <SCQuestion
                 turned={turned.includes(i)}
+                unturned={unturned.includes(i)}
+                disable={disable.includes(i)}
             >
                 <p>Pergunta {i+1}</p>
                 <button 
-                    disable={'false'}
+                    disabled={disable.includes(i) ? true : false}
                     onClick={() => changeCardType(i)} 
                 >
-                    <img src={play} />
+                    <img src={returnIcon(i)} />
                 </button>
             </SCQuestion>
             <SCAnswer
                 turned={turned.includes(i)}
+                text={text.includes(i)}
+                disable={disable.includes(i)}
             >
                 <p>
-                    {text === 0 ? card.question : card.answer}
+                    {text.includes(i) ? card.answer : card.question}
                 </p>
-                
+                <img 
+                    src={turn} 
+                    onClick={(() => showAnswer(i))} 
+                    text={text.includes(i)}
+                />
+                <SCButtons>
+                    <SCButton
+                        text={text.includes(i)}
+                        id={0}
+                        onClick={(() => unturn(i))}
+                        color={'#FF3030'}
+                    >
+                        Não Lembrei
+                    </SCButton>
+                    <SCButton
+                        text={text.includes(i)}
+                        id={1}
+                        onClick={(() => unturn(i))}
+                        color={'#FF922E'} 
+                    >
+                        Quase não Lembrei
+                    </SCButton>
+                    <SCButton
+                        text={text.includes(i)}
+                        id={2}
+                        onClick={(() => unturn(i))}
+                        color={'#2FBE34'}
+                    >
+                        Zap!
+                    </SCButton>
+
+                </SCButtons>
             </SCAnswer>
             </>
             ))
@@ -77,6 +157,7 @@ const SCQuestion = styled.div`
     padding: 23px 15px;
 
     display: ${(props => props.turned ? 'none' : 'flex')};
+
     justify-content: space-between;
 
     p{
@@ -85,6 +166,7 @@ const SCQuestion = styled.div`
         font-size: 16px;
         line-height: 19px;
         color: #333333
+        text-decoration: ${(props => props.disable ? 'line-through' : 'none')};
     }
 
     button{
@@ -108,7 +190,9 @@ const SCAnswer = styled.div`
 
     margin: 12.5px auto;
 
-    display:${(props => props.turned ? 'block' : 'none')};
+    display: ${(props => props.turned ? 'flex' : 'none')};
+    justify-content: space-between;
+    flex-direction: column;
 
     p{
         font-family: 'Recursive', sans-serif;
@@ -117,5 +201,39 @@ const SCAnswer = styled.div`
         line-height: 22px;
         color: #333333
     }
+    
+    img{
+        width: 30px;
+        height: 20px;
+        display: ${(props => props.text ? 'none' : '')};
+        margin-left: 250px;
+        margin-top: 65px;
+    }
 
+`
+const SCButtons = styled.div`
+    display: flex;
+    justify-content: space-between;
+`
+
+const SCButton = styled.button`
+        width: 85.17px;
+        height: 37.17px;
+
+        cursor: pointer;
+        border-radius: 5px;
+        border: none;
+
+        font-family: 'Recursive', sans-serif;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 14px;
+        color: #ffffff;
+
+        display:${(props => props.text ? 'flex' : 'none')};
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
+        background-color: ${(props => props.color)}
 `
