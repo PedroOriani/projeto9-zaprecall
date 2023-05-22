@@ -15,7 +15,7 @@ function App() {
     <Questions 
       cards={cards}
       count={count}
-      setCount={setCount}
+      setcount={setcount}
     />
     <Footer
       cards={cards}
