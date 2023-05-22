@@ -205,13 +205,13 @@ const SCQuestion = styled.div`
 
     justify-content: space-between;
 
+    text-decoration: ${(props => props.disable ? 'line-through' : 'none')};
+
     p{
         font-family: 'Recursive', sans-serif;
         font-weight: 700;
         font-size: 16px;
         line-height: 19px;
-        color: ${(props => props.green ? 'green' : 'black')}
-        text-decoration: ${(props => props.disable ? 'line-through' : 'none')};
     }
 
     button{
@@ -224,13 +224,26 @@ const SCQuestion = styled.div`
 `
 
 const SCTexto = styled.p`
-    color: ${(props => props.green ? 'green' : 'black')}
-    text-decoration: ${(props => props.disable ? 'line-through' : 'none')};
+    font-family: 'Recursive', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    color: ${(props => {
+            if(props.red){
+                return '#FF3030';
+            }else if(props.yellow){
+                return '#FF922E';
+            }else if(props.green){
+                return '#2FBE34';
+            }
+    })}
 `
+
 
 const SCAnswer = styled.div`
     width: 300px;
-    height: 131px;
+    min-height: 131px;
+    height: auto;
 
     background-color: #FFFFD4;
 
@@ -257,7 +270,7 @@ const SCAnswer = styled.div`
         height: 20px;
         display: ${(props => props.text ? 'none' : '')};
         margin-left: 250px;
-        margin-top: 50px;
+        margin-top: 60px;
     }
 
 `
@@ -273,6 +286,8 @@ const SCButton = styled.button`
         cursor: pointer;
         border-radius: 5px;
         border: none;
+
+        margin-top: 30px;
 
         font-family: 'Recursive', sans-serif;
         font-weight: 400;
