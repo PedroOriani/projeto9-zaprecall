@@ -132,6 +132,7 @@ export default function Questions(props){
                     src={turn} 
                     onClick={(() => showAnswer(i))} 
                     text={text.includes(i)}
+                    data-test="turn-btn"
                 />
                 <SCButtons>
                     <SCButton
