@@ -20,9 +20,6 @@ const SCButtons = styled.div`
     display: flex;
     justify-content: space-between;
 
-    position: absolute;
-    
-
     button{
         width: 85.17px;
         height: 37.17px;
@@ -36,6 +33,11 @@ const SCButtons = styled.div`
         font-size: 12px;
         line-height: 14px;
         color: #ffffff;
+
+
+        position: absolute;
+        right: 0px;
+        bottom: 0px;
     }
     img{
         display: none;
