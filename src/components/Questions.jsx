@@ -89,12 +89,12 @@ export default function Questions(props){
         }else if(yellow.includes(i)){
             return "partial-icon";
         }else{
-            return "flashcard";
+            return "play-btn";
         }
     }
 
     return(
-        <SCQuestions>
+        <SCQuestions data-test="flashcard">
             {cards.map((card,i) => (
             <>
             <SCQuestion
