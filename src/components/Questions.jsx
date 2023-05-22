@@ -94,9 +94,9 @@ export default function Questions(props){
     }
 
     return(
-        <SCQuestions data-test="flashcard">
+        <SCQuestions >
             {cards.map((card,i) => (
-            <>
+            <div data-test="flashcard">
             <SCQuestion
                 turned={turned.includes(i)}
                 disable={disable.includes(i)}
@@ -164,7 +164,7 @@ export default function Questions(props){
 
                 </SCButtons>
             </SCAnswer>
-            </>
+            </div>
             ))
         }
         </SCQuestions>
