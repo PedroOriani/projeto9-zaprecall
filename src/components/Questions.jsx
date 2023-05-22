@@ -202,17 +202,9 @@ const SCQuestion = styled.div`
     padding: 23px 15px;
 
     display: ${(props => props.turned ? 'none' : 'flex')};
-
     justify-content: space-between;
 
     text-decoration: ${(props => props.disable ? 'line-through' : 'none')};
-
-    p{
-        font-family: 'Recursive', sans-serif;
-        font-weight: 700;
-        font-size: 16px;
-        line-height: 19px;
-    }
 
     button{
         width: 20px;
@@ -221,14 +213,8 @@ const SCQuestion = styled.div`
         border: none;
         cursor: pointer;
     }
-`
 
-const SCTexto = styled.p`
-    font-family: 'Recursive', sans-serif;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 19px;
-    color: ${(props => {
+    text-decoration-color: ${(props => {
             if(props.red){
                 return '#FF3030';
             }else if(props.yellow){
@@ -236,9 +222,25 @@ const SCTexto = styled.p`
             }else if(props.green){
                 return '#2FBE34';
             }
-    })}
+    })} 
 `
 
+const SCTexto = styled.p`
+    font-family: 'Recursive', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: ${(props => {
+            if(props.red){
+                return '#FF3030';
+            }else if(props.yellow){
+                return '#FF922E';
+            }else if(props.green){
+                return '#2FBE34';
+            }else{
+                return '#333333';
+            }
+    })}
+`
 
 const SCAnswer = styled.div`
     width: 300px;
