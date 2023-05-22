@@ -7,7 +7,7 @@ import Footer from './components/Footer'
 
 function App() {
   
-  const [count, setCount] = useState([])
+  const [count, setcount] = useState([])
 
   return (
     <SCApp>
