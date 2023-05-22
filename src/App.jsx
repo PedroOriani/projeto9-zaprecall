@@ -29,4 +29,5 @@ export default App
 
 const SCApp = styled.div`
   	background-color: #fb6b6b;
+    overflow-x: hidden;
 `

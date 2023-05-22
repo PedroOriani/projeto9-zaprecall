@@ -9,65 +9,63 @@ import erro from '../assets/icone_erro.png';
 
 export default function Questions(props){
 
-    const {cards, count, setCount} = props;
+    const {cards, count, setcount} = props;
     const {question, answer} = cards;
 
     let teste = [];
-    let testeStr;
-    let arrFinal = [];
+    let testestr;
 
     for (let i = 0; i < cards.length; i++){
         teste.push(i)
     }
 
-    const [turned, setTurned] = useState([]);
-    const [disable, setDisable] = useState([]);
-    const [unturned, setUnturned] = useState([]);
-    const [text, setText] = useState([]);
-    const [green, setGreen] = useState([]);
-    const [red, setRed] = useState([]);
-    const [yellow, setYellow] = useState([]);
+    const [turned, setturned] = useState([]);
+    const [disable, setdisable] = useState([]);
+    const [text, settext] = useState([]);
+    const [green, setgreen] = useState([]);
+    const [red, setred] = useState([]);
+    const [yellow, setyellow] = useState([]);
 
     function changeCardType(i){
         const newArrTurn = [...turned, i]
-        setTurned(newArrTurn);
+        setturned(newArrTurn);
         const newArrDis = [...disable, i]
-        setDisable(newArrDis);
+        setdisable(newArrDis);
     }
 
     function showAnswer(i) {
         const newArrAnsw = [...text, i]
-        setText(newArrAnsw);
+        settext(newArrAnsw);
     }
 
     function correct(i){
         const newArrGreen = [...green, i]
-        setGreen(newArrGreen);
+        setgreen(newArrGreen);
         unturn(i);
     }
 
     function almost(i){
         const newArrYellow = [...yellow, i]
-        setYellow(newArrYellow);
+        setyellow(newArrYellow);
         unturn(i);
     }
 
     function wrong (i){
         const newArrRed = [...red, i]
-        setRed(newArrRed);
+        setred(newArrRed);
         unturn(i);
     }
 
     function unturn(i) {
-        testeStr = turned.join('')
-        let newStr = testeStr.replace(i, '');
+        testestr = turned.join('')
+        let newStr = testestr.replace(i, '');
         let strArr = newStr.split('')
         for (let i = 0; i < strArr.length; i++){
             strArr[i] = parseInt(strArr[i])
         }
-        setTurned(strArr)
+        setturned(strArr)
         const newArrCount = [...count, i]
-        setCount(newArrCount);
+        setcount(newArrCount);
         returnIcon(i);
     }
 
@@ -101,7 +99,6 @@ export default function Questions(props){
             <>
             <SCQuestion
                 turned={turned.includes(i)}
-                unturned={unturned.includes(i)}
                 disable={disable.includes(i)}
                 green={green.includes(i)}
                 yellow={yellow.includes(i)}
@@ -117,9 +114,10 @@ export default function Questions(props){
                 </SCTexto>
                 <button 
                     disabled={disable.includes(i) ? true : false}
-                    onClick={() => changeCardType(i)} 
+                    onClick={() => changeCardType(i)}
+                    data-test={returnDataTest(i)} 
                 >
-                    <img data-test={returnDataTest(i)} src={returnIcon(i)} />
+                    <img src={returnIcon(i)} />
                 </button>
             </SCQuestion>
             <SCAnswer
